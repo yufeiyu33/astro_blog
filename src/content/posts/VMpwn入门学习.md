@@ -1,9 +1,10 @@
 ---
-title: VMpwn入门学习
-tags: vmpwn
-categories: ctf-pwn
-abbrlink: 43250
-date: 2025-03-13 21:37:15
+title: VMpwn 入门学习
+published: 2024-07-24
+description: 以一道简单vmpwn的题目来完成入门
+tags: [CTF, pwn]
+category: Front-end
+draft: false
 ---
 
 这里将以一道入门级别的vmpwn题目简单学习一下
