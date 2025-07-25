@@ -1,0 +1,30 @@
+---
+interface Props {
+	path: string;
+}
+
+const config = {
+	el: "#comment",
+	path: Astro.props.path,
+};
+---
+
+<!-- 简化了配置部分的代码，实际上可以把配置文件统一写入fuwari的配置文件统一读取 -->
+<div id="comment"></div>
+<script define:vars={{ config }}>
+  function loadTwikoo() {
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.all.min.js";
+    script.defer = true;
+    script.onload = () => {
+      twikoo.init({
+        ...config,
+        envId: "https://astro-blog-blond-ten.vercel.app/", // 你的envId，获取方法请参照Twikoo文档
+        lang: "zh-CN", // 评论区语言
+      }); // 传入配置信息
+    };
+    document.body.appendChild(script);
+  }
+  document.addEventListener("loadComment", loadTwikoo, { once: true }); // 监听加载评论事件，但是我们只能监听一次，从而避免多次触发。
+</script>
