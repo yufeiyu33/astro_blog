@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+
+// 获取所有文章
+const posts = await getCollection('posts');
+
+// 根据标题筛选文章，例如选择标题中包含 "特定" 字样的文章
+const specificPosts = posts.filter(post => post.data.title.includes("特定"));
+---
+
+<MainGridLayout title={i18n(I18nKey.other_articles)}>
+  <h2>标题中包含"特定"的文章</h2>
+  <!-- 渲染筛选后的文章列表 -->
+  <ul>
+    {specificPosts.map(post => (
+      <li>
+        <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+      </li>
+    ))}
+  </ul>
+</MainGridLayout>

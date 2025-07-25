@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+
+// 获取 URL 参数中的 slug
+const { slug } = Astro.params;
+
+// 从 "posts" 集合中获取所有文章
+const posts = await getCollection('posts');
+
+// 查找与 slug 匹配的文章
+const post = posts.find(p => p.slug === slug);
+
+// 如果没有找到匹配的文章，返回 404 页面
+if (!post) {
+  throw new Error('Post not found');
+}
+---
+
+<article>
+  <h1>{post.title}</h1>
+  <p>{post.description}</p>
+  <div>{post.body}</div>
+</article>
